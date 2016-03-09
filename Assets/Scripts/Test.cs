@@ -10,13 +10,13 @@ public class Test : MonoBehaviour
 	void Start ()
     {
         mc.loadPathRes("test");
-        mc.setScale(15f);
+        //mc.setScale(15f);
         mc.gotoAndPlay(1, -1);
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        img.sprite = mc.GetComponent<SpriteRenderer>().sprite;
+        //img.sprite = mc.GetComponent<SpriteRenderer>().sprite;
 	}
 }

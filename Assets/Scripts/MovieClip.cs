@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 //序列帧动画
 public class MovieClip : MonoBehaviour
 {
     //sprite渲染
     private SpriteRenderer sr = null;
+    //图片
+    private Image img = null;
     //动画数组    
     private Object[] aniAry = null;
     //运行间隔
@@ -33,8 +36,7 @@ public class MovieClip : MonoBehaviour
     void Awake()
     {
         this.sr = this.gameObject.GetComponent<SpriteRenderer>();
-        if (this.sr == null)
-            this.sr = this.gameObject.AddComponent<SpriteRenderer>();
+        this.img = this.gameObject.GetComponent<Image>();
         this.delay = 1 / (float)(this.fps);
         this._currentframe = 1;
         this.curLoop = 0;
@@ -101,11 +103,13 @@ public class MovieClip : MonoBehaviour
     /// </summary>
     public void render()
     {
-        if (this.sr == null) return;
+        
         if (this.aniAry == null) return;
         if (this.aniAry.Length == 0) return;
-        GameObject spt = aniAry[this._currentframe - 1] as GameObject;
-        this.sr.sprite = spt.GetComponent<SpriteRenderer>().sprite;
+        GameObject sptGo = aniAry[this._currentframe - 1] as GameObject;
+        Sprite spt = sptGo.GetComponent<SpriteRenderer>().sprite;
+        if (this.sr != null) this.sr.sprite = spt;
+        if (this.img != null) this.img.sprite = spt;
     }
 
     /// <summary>
